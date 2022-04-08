@@ -3,13 +3,13 @@ import {useState, useEffect} from "react";
 function App() {
   const [loading, setLoading] = useState(true);
   const [coins, setCoins] = useState([]);
-  //const [top, setTop] = useState([]);
+  const [top, setTop] = useState([]);
   useEffect(()=>{
     fetch("https://api.coinpaprika.com/v1/tickers?quotes=KRW")
     .then(response => response.json())
     .then(json=>{
       setCoins(json);
-     // setTop(json.slice[0,100]);
+      setTop(json.slice(0,100));
       setLoading(false);
     });
   },[])
@@ -25,7 +25,7 @@ function App() {
         }
         <h2>실시간 TOP100</h2>
         <ol>
-        {coins.map(coin=>
+        {top.map(coin=>
             <li key={coin.id}>{coin.name} ({coin.symbol}) {(Math.round(coin.quotes.KRW.price)).toLocaleString()} KRW</li>
             )}
         </ol>
