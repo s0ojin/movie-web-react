@@ -1,3 +1,4 @@
+import { isThrowStatement } from "@babel/types";
 import {useState, useEffect} from "react";
 import Movie from "../components/Movie";
 
@@ -22,7 +23,8 @@ function Home() {
           {loading ? <h1>Loading</h1> : 
           movie.map((item)=> 
             <Movie
-            key={item.id} 
+            key={item.id}
+            id={item.id}
             coverImg={item.medium_cover_image}
             title={item.title}
             summary={item.summary}
