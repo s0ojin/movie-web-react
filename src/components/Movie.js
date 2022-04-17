@@ -5,7 +5,7 @@ function Movie({id,coverImg,title,summary,genres}) {
     return( 
     <div>
       <img src={coverImg} alt={title} />
-      <h1> <Link to={`/movie/${id}`}>{title}</Link></h1>
+      <h1><Link to={`/movie/${id}`}>{title}</Link></h1>
       <p>{summary}</p>
       <ul>
         {genres.map(genre=>
