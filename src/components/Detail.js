@@ -1,10 +1,11 @@
 import { async } from "q";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
+import styles from "./Detail.module.css";
 
 function Detail() {
   const { id } = useParams();
-  const [detail, setDetail] = useState([]);
+  const [detail, setDetail] = useState();
   const [loading, setLoading] = useState(true);
   const getMovie = async() => {
     const json = await(
@@ -18,17 +19,33 @@ function Detail() {
   useEffect(()=>{
     getMovie();
   },[])
-  
+
   return(
     <div>
-      {loading ? <h1>Loading</h1> :
-        <div>
-          <h2>{detail.title}</h2>
-          {detail.rating}
-          <img src={detail.medium_cover_image} />
-          <p>{detail.description_full}</p>
-        </div>
-      }
+        {loading ? <h1 className={styles.loader}>Loading</h1> :
+          <div className={styles.container} style={{backgroundImage:`url(${detail.background_image_original})`}}>
+            <div className={styles.movie}>
+              <div>
+                <img src={detail.medium_cover_image} alt={detail.title} className={styles.movie__img}/>
+              </div>
+              <div>
+                <h2 className={styles.movie__title}>{detail.title_long}</h2>
+                <div className={styles.details}>
+                  <ul className={styles.movie__genres}>
+                    {detail.genres.map(genre=>
+                    <li key={genre}>{genre}</li>)}
+                  </ul>
+                  <h3 className={styles.movie__rating}>⭐ {detail.rating}</h3>
+                  <h3 className={styles.movie__runtime}>{Math.floor(detail.runtime/60)}h {detail.runtime % 60}m</h3>
+                </div>
+                <p>{detail.description_full}</p>
+              <div className={styles.trailerBox}>
+                <iframe src={`https://www.youtube.com/embed/${detail.yt_trailer_code}?mute=1&&autoplay=1`} className={styles.trailer}></iframe>
+              </div>
+              </div>
+            </div>
+          </div>
+        }
     </div>
     ) 
 }
