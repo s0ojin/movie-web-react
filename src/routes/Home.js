@@ -2,6 +2,7 @@ import { isThrowStatement } from "@babel/types";
 import {useState, useEffect} from "react";
 import Movie from "../components/Movie";
 import styles from "./Home.module.css";
+import { ReactComponent as Loading } from "../components/loading.svg";
 
 function Home() {
   const [loading, setLoading] = useState(true);
@@ -23,7 +24,7 @@ function Home() {
         <div className={styles.container}>
           {loading ? (
             <div className={styles.loader}>
-            <h1>Loading</h1>
+            <h1><Loading width="50" height="50" viewBox="0 0 500 500" fill="#b3afe4" /></h1>
             </div> 
           ) : ( 
           <div className={styles.movies}>
