@@ -2,7 +2,7 @@ import { async } from "q";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import styles from "./Detail.module.css";
-import { ReactComponent as Loading } from "../components/loading.svg";
+import { ReactComponent as Loading } from "../icon/loading.svg";
 
 function Detail() {
   const { id } = useParams();
@@ -23,7 +23,7 @@ function Detail() {
 
   return(
     <div>
-        {loading ? <h1 className={styles.loader}><Loading width="50" height="50" viewBox="0 0 500 500" fill="#b3afe4" /></h1> :
+        {loading ? <h1 className={styles.loader}><Loading fill="gray" /></h1> :
           <div className={styles.container} style={{backgroundImage:`url(${detail.background_image_original})`}}>
             <div className={styles.movie}>
               <div>
